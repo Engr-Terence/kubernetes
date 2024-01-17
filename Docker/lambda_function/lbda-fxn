@@ -1,0 +1,17 @@
+'use strict';
+
+const aws = require('aws-sdk');
+const cloudwatch = new aws.CloudWatch();
+
+exports.handler = async (event, context) => {
+  const params = {
+    LogGroupName: event.logGroupName,
+  };
+
+  try {
+    await cloudwatch.deleteLogGroups(params).promise();
+    console.log('Log group deleted successfully.');
+  } catch (err) {
+    console.log(err);
+  }
+};
